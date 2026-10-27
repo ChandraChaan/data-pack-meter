@@ -2,4 +2,9 @@
 <resources>
     <color name="brand">#0B7A75</color>
     <color name="launch_background">#F4FBF9</color>
+    <color name="widget_background">#F4FBF9</color>
+    <color name="widget_text">#161D1C</color>
+    <color name="widget_subtle">#3F4947</color>
+    <color name="widget_track">#DAE5E2</color>
+    <color name="widget_accent">#0B7A75</color>
 </resources>

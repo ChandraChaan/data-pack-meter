@@ -17,6 +17,21 @@
     <string name="alert_full_title">Your data pack is used up</string>
     <string name="alert_full_text">%1$s of %2$s used, resets in %3$s.</string>
 
+    <string name="widget_description">Today\'s mobile data against your pack.</string>
+    <string name="widget_title_daily">Daily pack</string>
+    <string name="widget_title_monthly">Monthly pack</string>
+    <string name="widget_title_today">Mobile today</string>
+    <string name="widget_percent">%1$d%% used</string>
+    <string name="widget_used_of">%1$s of %2$s</string>
+    <string name="widget_left">%1$s left</string>
+    <string name="widget_over">%1$s over</string>
+    <string name="widget_detail">%1$s · resets in %2$s</string>
+    <string name="widget_set_up">Open the app to set up your pack.</string>
+    <string name="widget_no_access">Usage access needed</string>
+    <string name="widget_open_app">Tap to open Data Pack Meter.</string>
+    <string name="widget_preview_used">1.09 GB of 1.5 GB</string>
+    <string name="widget_preview_detail">416 MB left · resets in 7 h 40 min</string>
+
     <string name="duration_days_hours">%1$d d %2$d h</string>
     <string name="duration_hours_minutes">%1$d h %2$d min</string>
     <string name="duration_minutes">%1$d min</string>

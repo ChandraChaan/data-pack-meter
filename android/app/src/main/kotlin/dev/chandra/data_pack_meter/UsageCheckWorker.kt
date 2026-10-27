@@ -8,10 +8,11 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import java.util.concurrent.TimeUnit
 
-/** Checks the pack every 15 minutes (Android's minimum) for alerts. */
+/** Every 15 minutes (Android's minimum): pack alerts and the home-screen widget. */
 class UsageCheckWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
     override fun doWork(): Result {
-        PackCheck.run(applicationContext)
+        val use = PackCheck.run(applicationContext)
+        PackWidget.refresh(applicationContext, use)
         return Result.success()
     }
 

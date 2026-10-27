@@ -122,6 +122,7 @@ class SpeedMeterService : Service() {
             lastPackCheckMs = now
             worker.execute {
                 val use = PackCheck.run(this)
+                PackWidget.refresh(this, use)
                 val line = use?.let { packLine(it) }
                 handler.post { packLine = line }
             }
