@@ -4,12 +4,12 @@
 
 ## This project
 
-- **What it is:** Data Pack Meter, an Android app: live speed in the status bar, daily/monthly data pack tracking and per-app use. Everything on the device.
+- **What it is:** Data Pack Meter, an Android app: live speed in the status bar, daily/monthly data pack tracking, per-app use and a home-screen widget. Everything on the device.
 - **State management:** Riverpod 3 (`Notifier`, `AsyncNotifier`). Automatic retries are off (`noRetry`); screens have their own retry.
 - **Navigation:** three tabs in `HomeShell` (`lib/app.dart`); no router package.
 - **Folders:** feature-first, `lib/features/<feature>/{data,domain,presentation}`, shared code in `lib/core/`.
 - **Platform code:** Kotlin in `android/app/src/main/kotlin/`, reached only through the channel in `lib/core/platform/native_channel.dart` and the `Channel*Repository` classes. Pure Kotlin logic (speed sampling, formatting, pack periods, alerts) has JVM unit tests: `cd android && ./gradlew :app:testDebugUnitTest`.
-- **Pack rules live twice:** `pack_period.dart` (UI) and `PackMath.kt` (background alerts). Change both, with tests on both sides.
+- **Pack rules live twice:** `pack_period.dart` (UI) and `PackMath.kt` (background alerts and the widget, `PackWidget.kt`). Change both, with tests on both sides.
 - **Generated code:** only `lib/l10n/app_localizations*.dart` (`flutter gen-l10n`).
 - **Supported:** Android 8.0 (API 26) and later.
 

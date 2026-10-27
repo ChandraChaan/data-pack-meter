@@ -14,7 +14,7 @@ class BootReceiver : BroadcastReceiver() {
             Intent.ACTION_MY_PACKAGE_REPLACED -> prefs.meterEnabled
             else -> return
         }
-        if (prefs.plan != null) UsageCheckWorker.schedule(context)
+        if (prefs.plan != null || PackWidget.hasWidgets(context)) UsageCheckWorker.schedule(context)
         if (!restart) return
         try {
             SpeedMeterService.start(context)

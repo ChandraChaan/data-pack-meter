@@ -47,6 +47,11 @@ Android will ask you to allow installs from your browser or file manager the fir
 - **Your pack, at a glance.** Set a daily pack (renews at midnight) or a monthly one (renews on the day you choose; in shorter months, the last day). A ring shows how much is used, what's left and how long until it renews.
 - **Alerts at 80% and 100%.** Once each per pack period, checked in the background every 15 minutes (every minute while the meter is on).
 - **Which apps use it.** Per-app use for today, 7 days or 30 days, for mobile data and Wi-Fi separately, with app names and icons.
+- **Home-screen widget.** Today's use against your pack, what's left and when it renews, without opening the app. It refreshes every 15 minutes, every minute while the meter is on, and whenever you open the app.
+
+<img src="docs/screenshots/widget.png" width="300" alt="Home-screen widget: Daily pack, 1.09 GB of 1.5 GB, a progress bar, 416 MB left, resets in 7 h 40 min">
+
+*The widget's preview in the Android 17 widget picker.*
 
 ## How it works
 
@@ -55,7 +60,7 @@ Android will ask you to allow installs from your browser or file manager the fir
 | Live speed | Android's [`TrafficStats`](https://developer.android.com/reference/android/net/TrafficStats) byte counters, sampled once a second. The difference between two samples is the speed. |
 | Pack use and per-app use | Android's own data usage log, [`NetworkStatsManager`](https://developer.android.com/reference/android/app/usage/NetworkStatsManager). This is the same record the system's Data usage screen uses. |
 | Status bar icon | The speed is drawn into a small bitmap each second and set as the notification's icon. |
-| Alerts | A WorkManager job every 15 minutes, plus a check every minute while the meter runs. |
+| Alerts and widget | A WorkManager job every 15 minutes, plus a check every minute while the meter runs. |
 
 The Flutter UI talks to Kotlin through one platform channel, behind Dart repository interfaces, so the screens and the pack logic (renewal dates, time zones, units, alert levels) are unit-tested with fakes. The Kotlin side has its own JVM tests for speed sampling, byte counting and formatting.
 
@@ -71,7 +76,7 @@ The Flutter UI talks to Kotlin through one platform channel, behind Dart reposit
 | Notifications (`POST_NOTIFICATIONS`) | The status bar meter and the 80% / 100% alerts. |
 | Foreground service (`FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_SPECIAL_USE`) | Keeps the meter running while you use other apps. Declared as a special-use service: a live status bar indicator the user turned on. |
 | Run at startup (`RECEIVE_BOOT_COMPLETED`) | Brings the meter back after a restart, only if you turned that on. |
-| `WAKE_LOCK`, `ACCESS_NETWORK_STATE` | Added by Android's WorkManager library to run the background pack check. |
+| `WAKE_LOCK`, `ACCESS_NETWORK_STATE` | Added by Android's WorkManager library to run the background pack check and widget refresh. |
 
 There is **no `INTERNET` permission**: the app cannot send anything anywhere. Android's backup of app data is turned off as well.
 

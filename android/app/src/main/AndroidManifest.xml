@@ -50,6 +50,20 @@
                 android:value="Shows the device's live network speed as a status bar icon, chosen by the user." />
         </service>
 
+        <!-- Exported so launchers can list it; APPWIDGET_UPDATE is a protected
+             broadcast only the system can send. -->
+        <receiver
+            android:name=".PackWidget"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pack_widget_info" />
+        </receiver>
+
         <receiver
             android:name=".MeterStopReceiver"
             android:exported="false" />

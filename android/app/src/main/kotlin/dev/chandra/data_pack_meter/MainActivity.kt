@@ -34,9 +34,15 @@ class MainActivity : FlutterActivity() {
 
         Notifications.createChannels(this)
         val prefs = Prefs(this)
-        if (prefs.plan != null) UsageCheckWorker.schedule(this)
+        if (prefs.plan != null || PackWidget.hasWidgets(this)) UsageCheckWorker.schedule(this)
         // The meter may have been refused a start at boot; the app is in front now.
         if (prefs.meterEnabled && !SpeedMeterService.running) SpeedMeterService.start(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Usage Access may have just been turned on in settings.
+        PackWidget.refreshAsync(this)
     }
 
     override fun onDestroy() {
@@ -51,6 +57,7 @@ class MainActivity : FlutterActivity() {
             "savePack" -> {
                 prefs.savePackFromMap(call.arguments as? Map<*, *> ?: emptyMap<String, Any>())
                 if (prefs.plan != null) UsageCheckWorker.schedule(this)
+                PackWidget.refreshAsync(this)
                 result.success(null)
             }
             "hasUsageAccess" -> result.success(UsageStats(this).hasUsageAccess())
