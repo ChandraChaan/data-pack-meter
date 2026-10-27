@@ -1,0 +1,27 @@
+name: data_pack_meter
+description: "Live network speed in the status bar and daily data pack tracking, on-device."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # State management (see AGENTS.md).
+  flutter_riverpod: ^3.4.3
+  # Number and date formatting for the UI.
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
